@@ -1,0 +1,27 @@
+import requests
+from bs4 import BeautifulSoup
+
+# specify the URL of the Amazon page you want to scrape
+url = "https://www.amazon.com/Apple-iPhone-11-Pro-64GB/dp/B07XVKBY68/"
+
+# send a request to the URL and get the response
+response = requests.get(url)
+
+# create a BeautifulSoup object with the response content
+soup = BeautifulSoup(response.content, 'html.parser')
+
+# extract the product title
+title = soup.find('span', {'class': 'a-size-large product-title-word-break'}).text.strip()
+print(title)
+
+# extract the product price
+price = soup.find('span', {'class': 'a-price-whole'}).text.strip()
+print(price)
+
+# extract the product rating
+rating = soup.find('span', {'class': 'a-icon-alt'}).text.strip()
+print(rating)
+
+# extract the product description
+description = soup.find('div', {'id': 'productDescription'}).text.strip()
+print(description)
